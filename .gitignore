@@ -24,3 +24,10 @@ dist-ssr
 *.sw?
 
 src/tests/*
+
+.firebase
+.firebaserc
+
+src/utils/firebase.js
+
+firebase.json

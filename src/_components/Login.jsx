@@ -1,6 +1,12 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { validateSigninData } from "../utils/validateData";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSigninForm, setIsSigninForm] = useState(true);
@@ -9,6 +15,8 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+
+  const navigate = useNavigate();
 
   const toggleSignInForm = () => {
     setIsSigninForm(!isSigninForm);
@@ -20,6 +28,47 @@ const Login = () => {
       password.current.value
     );
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (!isSigninForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+          // ..
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   };
 
   return (
@@ -43,10 +92,10 @@ const Login = () => {
         </h1>
         {!isSigninForm && (
           <input
-            type="name"
+            type="text"
             className="my-4 p-4 w-full bg-gray-700"
             placeholder="Name"
-            ref={email}
+            ref={name}
           />
         )}
         <input
