@@ -1,13 +1,7 @@
-import { useState } from "react";
+import Body from "./_components/Body.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return (
-    <div className="bg-red-600" data-testid="testdiv">
-      Hi from Netflix Gpt 2
-    </div>
-  );
+  return <Body />;
 }
 
 export default App;
