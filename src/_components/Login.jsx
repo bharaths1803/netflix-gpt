@@ -4,9 +4,12 @@ import { validateSigninData } from "../utils/validateData";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSigninForm, setIsSigninForm] = useState(true);
@@ -17,6 +20,7 @@ const Login = () => {
   const name = useRef(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     setIsSigninForm(!isSigninForm);
@@ -42,7 +46,24 @@ const Login = () => {
           const user = userCredential.user;
           // ...
 
-          navigate("/browse");
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL:
+              "https://res.cloudinary.com/dwit4dy8x/image/upload/v1737701019/qaut7ckfbshbaynhyjcb.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const { uid, displayName, photoURL, email } = auth.currentUser;
+              dispatch(addUser({ uid, displayName, photoURL, email }));
+
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
