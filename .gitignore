@@ -33,3 +33,5 @@ src/utils/firebase.js
 firebase.json
 
 .github
+
+.env

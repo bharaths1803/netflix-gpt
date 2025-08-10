@@ -3,3 +3,12 @@ export const NETFLIX_LOGO =
 
 export const MY_PHOTO =
   "https://res.cloudinary.com/dwit4dy8x/image/upload/v1737701019/qaut7ckfbshbaynhyjcb.jpg";
+
+export const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOTI4NTdmMjU0MGQ5ZjZhNDAxODE0MDkwNWI5NDgyNCIsIm5iZiI6MTc1NDgxMjA4Ny45NjUsInN1YiI6IjY4OTg0ZWI3M2IyYmU4MjU2YjhlYTljZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.R10q8tQn1wYkBTH4wqzdL68FwR7ADq-ptBshB3412N4",
+  },
+};
