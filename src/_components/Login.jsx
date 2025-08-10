@@ -10,6 +10,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { MY_PHOTO } from "../utils/constants";
 
 const Login = () => {
   const [isSigninForm, setIsSigninForm] = useState(true);
@@ -48,16 +49,13 @@ const Login = () => {
 
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://res.cloudinary.com/dwit4dy8x/image/upload/v1737701019/qaut7ckfbshbaynhyjcb.jpg",
+            photoURL: MY_PHOTO,
           })
             .then(() => {
               // Profile updated!
               // ...
               const { uid, displayName, photoURL, email } = auth.currentUser;
               dispatch(addUser({ uid, displayName, photoURL, email }));
-
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -79,10 +77,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
           // ...
-
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
