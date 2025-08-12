@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
+import { addTopRatedMovies } from "../utils/moviesSlice";
 import { options } from "../utils/constants";
 
-const usePlayingMovies = () => {
+const useTopRatedMovies = () => {
   const dispatch = useDispatch();
-  const nowPlayingMovies = useSelector((store) => store.nowPlayingMovies)
+  const nowPlayingMovies = useSelector((store) => store.topRatedMovies)
 
 
   const fetchMovies = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=1",
+      "https://api.themoviedb.org/3/movie/top_rated?page=1",
       options
     );
     const json = await data.json();
 
-    dispatch(addNowPlayingMovies(json.results));
+    dispatch(addTopRatedMovies(json.results));
   };
 
   useEffect(() => {
@@ -23,4 +23,4 @@ const usePlayingMovies = () => {
   }, []);
 };
 
-export default usePlayingMovies;
+export default useTopRatedMovies;

@@ -8,7 +8,37 @@ export const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmOTI4NTdmMjU0MGQ5ZjZhNDAxODE0MDkwNWI5NDgyNCIsIm5iZiI6MTc1NDgxMjA4Ny45NjUsInN1YiI6IjY4OTg0ZWI3M2IyYmU4MjU2YjhlYTljZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.R10q8tQn1wYkBTH4wqzdL68FwR7ADq-ptBshB3412N4",
+    Authorization: "Bearer " + import.meta.env.VITE_TMDB_KEY,
   },
 };
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+  { identifier: "tamizh", name: "Tamizh" },
+];
+
+export const BG_URL =
+  "https://assets.nflxext.com/ffe/siteui/vlv3/258d0f77-2241-4282-b613-8354a7675d1a/web/IN-en-20250721-TRIFECTA-perspective_cadc8408-df6e-4313-a05d-daa9dcac139f_small.jpg";
+
+export const lang = {
+  en: {
+    search: "Search",
+    gptSearchPlaceholder: "What would you like to watch today?",
+  },
+  hindi: {
+    search: "खोज",
+    gptSearchPlaceholder: "आज आप क्या देखना चाहेंगे?",
+  },
+  spanish: {
+    search: "buscar",
+    gptSearchPlaceholder: "¿Qué te gustaría ver hoy?",
+  },
+  tamizh: {
+    search: "தேடு",
+    gptSearchPlaceholder: "இன்று நீங்கள் என்ன பார்க்க விரும்புகிறீர்கள்?",
+  },
+};
+
+export const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;

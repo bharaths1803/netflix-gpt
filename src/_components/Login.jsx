@@ -10,7 +10,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { MY_PHOTO } from "../utils/constants";
+import { BG_URL, MY_PHOTO } from "../utils/constants";
 
 const Login = () => {
   const [isSigninForm, setIsSigninForm] = useState(true);
@@ -88,15 +88,13 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <Header />
       <div className="absolute">
         <img
-          src={
-            "https://assets.nflxext.com/ffe/siteui/vlv3/258d0f77-2241-4282-b613-8354a7675d1a/web/IN-en-20250721-TRIFECTA-perspective_cadc8408-df6e-4313-a05d-daa9dcac139f_small.jpg"
-          }
+          src={BG_URL}
           alt="Bg image"
-          className=""
+          className="h-screen object-cover w-screen"
         />
       </div>
       <form
